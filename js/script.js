@@ -137,14 +137,23 @@ randomBackgroundEl.forEach(span => {
 // select landing page element
 let landingPage = document.querySelector(".landing-page");
 
+
+
 // accesories img 
 let accesoriesImg = document.querySelector(".image-box");
 
-// get array of imgs 
+
+
+// get array of imgs  accesories
 let accesoriesImageArray = ["plant1.jpg" , "plant10.jpg" , "plant-03.jpg" , "acces-08.jpg" , "acces-07.jpg" , "acces-06.jpg" , "acces-05.jpg" , "acces-04.jpg" , "acces-03.jpg" , "acces-02.jpg" , "acces-01.jpg"]
+
+
 
 // get array of imgs
 let imgsArray = ["plant-04.jpg" , "plant-060.jpg" , "plant-070.jpg" , "plant-040.jpg" ,"plant-010.jpg" , "plant-020.jpg"]
+
+
+
 
 // set iterval random img
 setInterval(() => {
@@ -156,6 +165,9 @@ setInterval(() => {
     
     accesoriesImg.style.backgroundImage = 'url("imgs/' + accesoriesImageArray[randomNumberImg] + '")';
 }, 10000);
+
+
+
 //function to randomize imgs 
 
 function randomizeImgs () {
@@ -173,4 +185,41 @@ function randomizeImgs () {
         }, 10000);
 
     }
+}
+
+
+
+//select skills selector 
+
+let ourSkills = document.querySelector(".skills");
+
+window.onscroll = function () {
+
+    //skills offset top
+
+    let skillOffsetTop = ourSkills.offsetTop;
+
+    //skills outer height (offsetHeight)=> HtmlElement read only property calculat hight by pixels for specific element include border , padding 
+
+    let skillsOuterHeight = ourSkills.offsetHeight;
+
+    //window height (window.innerHeight) => read only property return height of my window or all layout of window by pixels include height of scrollbar *شاشة اللاب او الموبايل اللي بتعرض فيه يعني  هو ده الwindow اللي تقصده ^^  * 
+
+    let windowHeight = this.innerHeight;
+
+
+    // window scrollTop => ده الجزء اللي بعمل فيه اسكرول^^
+
+    let windowScrollTop = this.pageYOffset;
+
+    if(windowScrollTop > (skillOffsetTop + skillsOuterHeight - windowHeight)){
+
+        let allSkills = document.querySelectorAll(".skill-box .skill-progress span");
+
+        allSkills.forEach(skill => {
+            skill.style.width = skill.dataset.progress;
+            
+        });
+    }
+
 }
