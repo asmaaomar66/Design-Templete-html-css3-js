@@ -26,6 +26,45 @@ if (mainColors !== null){
 }
 
 
+//random background option 
+let backgroundOption = true ;
+
+//variable to control background interval
+let controlInterval;
+
+//check there's local storage random background item
+
+let backgroundLocalItem = localStorage.getItem("background_option");
+
+//check if random background local storage is not empty 
+
+if (backgroundLocalItem !== null){
+    if(backgroundLocalItem === 'true'){
+        backgroundOption = true;
+
+
+    }else{
+
+        backgroundOption = false;
+
+
+    }
+
+    //remove active class from all spans
+
+    document.querySelectorAll(".random-background span").forEach(element => {
+        element.classList.remove("active");
+
+    });
+
+    if(backgroundLocalItem === 'true'){
+
+        document.querySelector(".random-background .yes").classList.add("active");
+    
+    }else{
+        document.querySelector(".random-background .no").classList.add("active");
+    }
+}
 
 // toggel spin class icon
 document.querySelector(".toggle-setting .fa-gear").onclick = function() {
@@ -59,14 +98,64 @@ colorsLi.forEach(li => {
 
 
 
+//switch random background option
+const randomBackgroundEl = document.querySelectorAll(".random-background span");
+// loop on all spans
+randomBackgroundEl.forEach(span => {
+    //loop on every span 
+    span.addEventListener("click", (e) => {
+        
+        //remove active class from all span
+        e.target.parentElement.querySelectorAll(".active").forEach(element => {
+            element.classList.remove("active");
+        });
+        // add active class on self
+        e.target.classList.add("active");
+
+        if(e.target.dataset.background === 'yes'){
+            backgroundOption = true;
+
+            randomizeImgs();
+
+            localStorage.setItem("background_option" , true);
+
+        }else {
+
+            backgroundOption = false;
+
+            clearInterval(controlInterval);
+
+            localStorage.setItem("background_option" , false);
+
+
+        }
+    });
+
+});
+
+
 // select landing page element
 let landingPage = document.querySelector(".landing-page");
+
 // get array of imgs
 let imgsArray = ["plant-04.jpg" , "plant-060.jpg" , "plant-070.jpg" , "plant-040.jpg" ,"plant-010.jpg" , "plant-020.jpg"]
-setInterval(() => {
-    //get random number
-    let randomNumber = Math.floor(Math.random() * imgsArray.length);
 
-    // change background img url 
-    landingPage.style.backgroundImage = 'url("imgs/' + imgsArray[randomNumber] + '")';
-}, 10000);
+
+//function to randomize imgs 
+
+function randomizeImgs () {
+
+    if(backgroundOption === true){
+
+            controlInterval = setInterval(() => {
+
+            //get random number
+            let randomNumber = Math.floor(Math.random() * imgsArray.length);
+        
+            // change background img url 
+            landingPage.style.backgroundImage = 'url("imgs/' + imgsArray[randomNumber] + '")';
+
+        }, 1000);
+
+    }
+}

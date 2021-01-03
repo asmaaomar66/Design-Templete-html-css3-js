@@ -75,6 +75,23 @@ body {
 .setting-box .settings-content .option-box .colorsList li:nth-child(5) {
     background-color: greenyellow ;
 }
+.setting-box .random-background span.active {
+    opacity: 1;
+}
+.setting-box .random-background .yes,
+.setting-box .random-background .no {
+    width: 50px;
+    background-color: #009688;
+    color: #fff;
+    margin-top: 10px;
+    display: inline-block;
+    font-size: 12px;
+    padding: 4px 10px;
+    font-weight: bold;
+    border-radius: 5px;
+    opacity: .5;
+    cursor: pointer;
+}
 /* end settingbox */
 /* start landing page */
 .landing-page {
