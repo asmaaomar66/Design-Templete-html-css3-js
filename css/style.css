@@ -6,6 +6,13 @@
 }
 body {
     font-family: 'Open Sans', sans-serif;
+    height: 2000px;
+}
+.container {
+    width: 1170px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: auto;
 }
 /* start settingbox */
 .setting-box {
@@ -178,3 +185,31 @@ body {
 }
 
 /* end landing page */
+/* start accesories part */
+.about-us {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    display: flex;
+}
+.about-us .info-box {
+    flex: 1;
+    padding: 30px;
+}
+.about-us .info-box h2 {
+    font-size: 40px;
+    font-weight: bold;
+    color: var(--main--color);
+    letter-spacing: 8px;
+    margin-bottom: 10px;
+}
+.about-us .info-box p {
+    line-height: 2;
+    color: #767676;
+    margin: 0;
+}
+.about-us .image-box  {
+    flex: 1;
+    text-align: center;
+    border-radius: 50%;
+}
+/* end accesories part */

@@ -137,10 +137,25 @@ randomBackgroundEl.forEach(span => {
 // select landing page element
 let landingPage = document.querySelector(".landing-page");
 
+// accesories img 
+let accesoriesImg = document.querySelector(".image-box");
+
+// get array of imgs 
+let accesoriesImageArray = ["plant1.jpg" , "plant10.jpg" , "plant-03.jpg" , "acces-08.jpg" , "acces-07.jpg" , "acces-06.jpg" , "acces-05.jpg" , "acces-04.jpg" , "acces-03.jpg" , "acces-02.jpg" , "acces-01.jpg"]
+
 // get array of imgs
 let imgsArray = ["plant-04.jpg" , "plant-060.jpg" , "plant-070.jpg" , "plant-040.jpg" ,"plant-010.jpg" , "plant-020.jpg"]
 
+// set iterval random img
+setInterval(() => {
 
+    //get random number
+    let randomNumberImg = Math.floor(Math.random() * accesoriesImageArray.length);
+
+    //change accesories img url
+    
+    accesoriesImg.style.backgroundImage = 'url("imgs/' + accesoriesImageArray[randomNumberImg] + '")';
+}, 10000);
 //function to randomize imgs 
 
 function randomizeImgs () {
@@ -155,7 +170,7 @@ function randomizeImgs () {
             // change background img url 
             landingPage.style.backgroundImage = 'url("imgs/' + imgsArray[randomNumber] + '")';
 
-        }, 1000);
+        }, 10000);
 
     }
 }
