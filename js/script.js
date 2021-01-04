@@ -218,8 +218,91 @@ window.onscroll = function () {
 
         allSkills.forEach(skill => {
             skill.style.width = skill.dataset.progress;
-            
+
         });
     }
 
 }
+
+
+// creat popup with the image
+let ourGallary = document.querySelectorAll(".gallary img");
+
+ourGallary.forEach(img => {
+
+    img.addEventListener('click', (e) => {
+        
+        // create overlay element
+        let overlay = document.createElement("div");
+
+        //add class to overlay 
+        overlay.className = 'popup-overlay';
+
+        //append overlay to the body
+        document.body.appendChild(overlay);
+
+        //create popup box
+        let popupBox = document.createElement("div");
+
+        //add class to popup box
+        popupBox.className = 'popup-box';
+
+        if(img.alt !== null){
+
+            //create heading
+            let imgHeading = document.createElement("h3");
+            
+            //create text for heading
+            let imgText = document.createTextNode(img.alt);
+
+            //append text to heading
+            imgHeading.appendChild(imgText);
+
+            //append heading to popup-box
+            popupBox.appendChild(imgHeading);
+
+        }
+
+        //create image 
+        let popupImage = document.createElement("img");
+
+        //set image source 
+        popupImage.src = img.src;
+
+        //add image to popup box
+        popupBox.appendChild(popupImage);
+
+        //append the popup box to body 
+        document.body.appendChild(popupBox);
+
+        //create close span
+        let closeSpan = document.createElement("span");
+
+        //create closeSpan text
+        let closeSpanText = document.createTextNode("X");
+
+        //append text to close span
+        closeSpan.appendChild(closeSpanText);
+
+        //add class to close span 
+        closeSpan.className = 'close-span';
+
+        //append close span to popup box
+        popupBox.appendChild(closeSpan);
+
+
+    });
+});
+
+//close popup
+document.addEventListener("click", function (e){
+    
+    if(e.target.className == 'close-span') {
+
+        //close current popup
+        e.target.parentNode.remove();
+
+        //remove overlay
+        document.querySelector(".popup-overlay").remove();
+    }
+});
