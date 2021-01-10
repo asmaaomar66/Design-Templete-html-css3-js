@@ -87,12 +87,8 @@ colorsLi.forEach(li => {
         document.documentElement.style.setProperty('--main--color', e.target.dataset.color);
         // set color on local storage
         localStorage.setItem("color_option", e.target.dataset.color);
-        //remove active class from all children
-        e.target.parentElement.querySelectorAll(".active").forEach(element => {
-            element.classList.remove("active");
-        });
-        // add active class on self
-        e.target.classList.add("active");
+
+        activeClass(e);
     });
 });
 
@@ -105,12 +101,7 @@ randomBackgroundEl.forEach(span => {
     //loop on every span 
     span.addEventListener("click", (e) => {
         
-        //remove active class from all span
-        e.target.parentElement.querySelectorAll(".active").forEach(element => {
-            element.classList.remove("active");
-        });
-        // add active class on self
-        e.target.classList.add("active");
+        activeClass(e);
 
         if(e.target.dataset.background === 'yes'){
             backgroundOption = true;
@@ -306,3 +297,107 @@ document.addEventListener("click", function (e){
         document.querySelector(".popup-overlay").remove();
     }
 });
+
+
+//select all bullets
+const allBullets = document.querySelectorAll(".nav-bullets .bullet");
+
+
+//select all links
+const allLinks = document.querySelectorAll("ul a");
+
+
+
+function scrollSomeWhere (elements) {
+    
+    elements.forEach(ele => {
+
+        ele.addEventListener("click", (e) => {
+
+            e.preventDefault();
+            document.querySelector(e.target.dataset.section).scrollIntoView({
+                
+                behavior : 'smooth',
+                block : 'center',
+
+            });
+            
+    
+        });
+    });
+}
+
+scrollSomeWhere(allBullets);
+scrollSomeWhere(allLinks);
+
+//Handel active class
+
+function activeClass(ev){
+    
+    //remove active class from all span
+    ev.target.parentElement.querySelectorAll(".active").forEach(element => {
+        element.classList.remove("active");
+    });
+    // add active class on self
+    ev.target.classList.add("active");
+
+}
+
+//show bullets
+
+let bulletSpan = document.querySelectorAll(".bullet-option span");
+
+let bulletContainer = document.querySelector(".nav-bullets");
+
+let bulletLocalItem = localStorage.getItem(".bullet-option");
+
+if(bulletLocalItem !== null){
+
+    bulletSpan.forEach(span => {
+        span.classList.remove("active");
+    });
+
+    if(bulletLocalItem === 'block'){
+        bulletContainer.style.display = 'block';
+
+        document.querySelector(".bullet-option .show").classList.add("active");
+    }else {
+        bulletContainer.style.display = 'none';
+
+        document.querySelector(".bullet-option .hide").classList.add("active");
+    }
+}
+
+bulletSpan.forEach(span => {
+    span.addEventListener("click", (e) => {
+
+        if (span.dataset.display === 'show'){
+
+            bulletContainer.style.display = 'block';
+
+            localStorage.setItem("bullet-option", 'block');
+
+        }else{
+            bulletContainer.style.display = 'none';
+
+            localStorage.setItem("bullet-option", 'none');
+        }
+
+        activeClass(e);
+
+    });
+});
+
+//reset button
+
+document.querySelector(".reset-option").onclick = function (){
+
+    //localStorage.clear();
+
+    localStorage.removeItem("bullet-option");
+    localStorage.removeItem("color_option");
+    localStorage.removeItem("background_option");
+
+    window.location.reload();
+
+}
