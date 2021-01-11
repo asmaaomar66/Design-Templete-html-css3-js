@@ -304,7 +304,7 @@ const allBullets = document.querySelectorAll(".nav-bullets .bullet");
 
 
 //select all links
-const allLinks = document.querySelectorAll("ul a");
+const allLinks = document.querySelectorAll(".links a");
 
 
 
@@ -401,3 +401,42 @@ document.querySelector(".reset-option").onclick = function (){
     window.location.reload();
 
 }
+
+//toggle-menu
+let toggleBtn = document.querySelector(".toggle-menu");
+let toggleUl = document.querySelector(".links");
+
+toggleBtn.onclick = function (e) {
+    //stop propagation
+    e.stopPropagation();
+
+    this.classList.toggle("menu-active");
+
+    toggleUl.classList.toggle("open");
+
+}
+
+//stop propagation 
+toggleUl.onclick = function (e) {
+
+    e.stopPropagation();
+}
+//click anywhere outside menu and toggle button
+
+document.addEventListener("click", (e) => {
+
+    if (e.target !== toggleBtn && e.target !== toggleUl){
+
+        if(toggleUl.classList.contains("open")){
+
+            //check if menu is open
+            toggleBtn.classList.toggle("menu-active");
+
+            toggleUl.classList.toggle("open");
+
+        }
+        
+
+    }
+
+})
