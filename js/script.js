@@ -178,7 +178,15 @@ function randomizeImgs () {
     }
 }
 
+setInterval(() => {
 
+    //get random number
+    let randomNumber = Math.floor(Math.random() * imgsArray.length);
+
+    // change background img url 
+    landingPage.style.backgroundImage = 'url("imgs/' + imgsArray[randomNumber] + '")';
+
+}, 10000);
 
 //select skills selector 
 
